@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import android.widget.ProgressBar;
+import android.widget.FrameLayout;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,7 +23,7 @@ import androidx.annotation.Nullable;
 public class SecondActivity extends Activity {
 
     private SignView mSignView;
-    private ProgressBar mProgressBar;
+    private FrameLayout mProgressBar;
     Handler mHandler = new Handler(){
         @Override
         public void handleMessage(@NonNull Message msg) {
