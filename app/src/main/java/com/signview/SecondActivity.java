@@ -50,6 +50,10 @@ public class SecondActivity extends Activity {
         mHandler.sendEmptyMessageDelayed(1,3000);
     }
 
+    public void clear(View view){
+        mSignView.clear();
+    }
+
     private File createImageFile() {
         File imagePath = new File(getExternalFilesDir(""), "images");
         if (!imagePath.exists()) {
