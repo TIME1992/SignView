@@ -198,8 +198,11 @@ public class SignView extends View {
      * @param clearBlank 是否清除边缘空白区域
      * @param blank 要保留的边缘空白距离
      */
-    public void save(final File file, boolean clearBlank, int blank) {
-
+    public boolean save(final File file, boolean clearBlank, int blank) {
+        if (!isTouched){
+            Toast.makeText(mContext,"未进行签名",Toast.LENGTH_SHORT).show();
+            return false;
+        }
         final Bitmap bitmap = cachebBitmap;
         //BitmapUtil.createScaledBitmapByHeight(srcBitmap, 300);//  压缩图片
         //if (clearBlank) {
@@ -225,6 +228,7 @@ public class SignView extends View {
                 }
             }
         }).start();
+        return true;
     }
 
     /**

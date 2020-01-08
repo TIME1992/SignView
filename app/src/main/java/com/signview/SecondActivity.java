@@ -1,8 +1,7 @@
 package com.signview;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -41,13 +40,19 @@ public class SecondActivity extends Activity {
 
     public void sign(View view) {
         File image = createImageFile();
-        mSignView.save(image, false, 0);
-        SharedPreferences sp = getSharedPreferences("sign", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString("sign", image.getAbsolutePath());
-        editor.apply();
-        mProgressBar.setVisibility(View.VISIBLE);
-        mHandler.sendEmptyMessageDelayed(1,3000);
+        boolean mSave = mSignView.save(image, false, 0);
+        if (mSave){
+            //SharedPreferences sp = getSharedPreferences("sign", Context.MODE_PRIVATE);
+            //SharedPreferences.Editor editor = sp.edit();
+            //editor.putString("sign", image.getAbsolutePath());
+            //editor.apply();
+            Intent intent = new Intent();
+            intent.putExtra("sign",image.getAbsolutePath());
+            setResult(Activity.RESULT_OK,intent);
+            mProgressBar.setVisibility(View.VISIBLE);
+            mHandler.sendEmptyMessageDelayed(1,3000);
+        }
+
     }
 
     public void clear(View view){

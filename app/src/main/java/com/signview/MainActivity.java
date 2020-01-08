@@ -1,9 +1,7 @@
 package com.signview;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -14,7 +12,6 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
     private ImageView mImageView;
-    private boolean mBack = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +21,7 @@ public class MainActivity extends Activity {
     }
 
     public void sign(View view) {
-        startActivity(new Intent(MainActivity.this, SecondActivity.class));
+        startActivityForResult(new Intent(MainActivity.this, SecondActivity.class), 25);
     }
 
     /**
@@ -40,20 +37,11 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        if (mBack) {
-            SharedPreferences sp = getSharedPreferences("sign", Context.MODE_PRIVATE);
-            String path = sp.getString("sign", "path");
-            if (!"path".equals(path)) {
-                displayImage(path);
-            }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == 25) {
+            Toast.makeText(this,data.getStringExtra("sign"),Toast.LENGTH_SHORT).show();
+            displayImage(data.getStringExtra("sign"));
         }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mBack = true;
     }
 }
