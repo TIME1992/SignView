@@ -59,7 +59,8 @@ public class SignView extends View {
     /**
      * 背景色（指最终签名结果文件的背景颜色，默认为透明色）
      */
-    private int mBackColor = Color.TRANSPARENT;
+    //private int mBackColor = Color.TRANSPARENT;
+    private int mBackColor = Color.WHITE;
 
     public SignView(Context context) {
         super(context);
@@ -186,7 +187,7 @@ public class SignView extends View {
             //            invalidate();
 
             mPath.reset();
-            cacheCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+            cacheCanvas.drawColor(mBackColor, PorterDuff.Mode.CLEAR);
             invalidate();
         }
     }
