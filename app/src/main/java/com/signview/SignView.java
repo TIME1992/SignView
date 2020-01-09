@@ -187,7 +187,8 @@ public class SignView extends View {
             //            invalidate();
 
             mPath.reset();
-            cacheCanvas.drawColor(mBackColor, PorterDuff.Mode.CLEAR);
+            cacheCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+            cacheCanvas.drawColor(mBackColor);
             invalidate();
         }
     }
